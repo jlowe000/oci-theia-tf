@@ -76,9 +76,20 @@ variables:
     visible: true
 
   docker_image:
-    type: string
+    type: enum
     required: true
     title: "Theia Docker Image"
+    default: "theiaide/theia-full:latest"
+    # enumerated values
+    enum:
+      - "theiaide/theia-cpp:latest"
+      - "theiaide/theia-full:latest"
+      - "theiaide/theia-go:latest"
+      - "theiaide/theia-java:latest"
+      - "theiaide/theia-php:latest"
+      - "theiaide/theia-python:latest"
+      - "theiaide/theia-rust:latest"
+      - "theiaide/theia-swift:latest"
 
   custom_theia_user:
     type: string
