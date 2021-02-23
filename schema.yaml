@@ -21,6 +21,7 @@ variableGroups:
     - compute_shape
     - theia-web_source_image_id
     - custom_ssh_key
+    - docker_image 
     - custom_theia_user
     - custom_theia_password
 
@@ -73,6 +74,11 @@ variables:
     required: true
     title: "GIT Repository URL"
     visible: true
+
+  docker_image:
+    type: string
+    required: true
+    title: "Theia Docker Image"
 
   custom_theia_user:
     type: string

@@ -5,4 +5,5 @@ variable theia-web_source_image_id { default = "ocid1.image.oc1.ap-sydney-1.aaaa
 variable custom_ssh_key { default = "ssh-rsa XXXX" }
 variable custom_theia_user { default = "developer" }
 variable custom_theia_password { default = "WelcomeTiger123" }
+variable docker_image { default = "theiaide/theia-python:1.10.0" }
 variable git_repo { default = "https://github.com/jlowe000/oci-theia.git" }

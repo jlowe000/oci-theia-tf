@@ -112,7 +112,7 @@ resource null_resource export_theia-web_remote-exec_oracle {
   provisioner remote-exec {
     inline = [
       "chmod +x /tmp/scripts/bootstrap-user-web.sh",
-      "sudo su - oracle bash -c '/tmp/scripts/bootstrap-user-web.sh ${var.custom_theia_user} ${var.custom_theia_password} \"${var.git_repo}\"'"
+      "sudo su - oracle bash -c '/tmp/scripts/bootstrap-user-web.sh ${var.docker_image} ${var.custom_theia_user} ${var.custom_theia_password} \"${var.git_repo}\"'"
     ]
   }
 }
