@@ -1,0 +1,85 @@
+# Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
+# Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
+title: "OCI Theia IDE Resource Manager Stack"
+stackDescription: "Theia"
+schemaVersion: 1.1.0
+version: "20210223"
+locale: "en"
+
+variableGroups:
+  - title: "General Configuration"
+    visible: true
+    variables:
+    - tenancy_ocid
+    - region
+    - compartment_ocid
+    - git_repo
+    
+  - title: "Compute Configuration"
+    visible: true  
+    variables:
+    - compute_shape
+    - theia-web_source_image_id
+    - custom_ssh_key
+    - custom_theia_user
+    - custom_theia_password
+
+variables:
+  theia-web_source_image_id:
+    type: oci:core:image:id
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+      operatingSystem: "Oracle Linux"      
+    required: true
+    visible: true
+    title: "Theia Web Compute Image"
+
+  compute_shape:
+    type: oci:core:instanceshape:name
+    description: Select a shape
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+    title: "Theia Web Compute"
+    required: true
+    default: "VM.Standard.E2.1.Micro"
+    visible: true
+
+  region:
+    type: oci:identity:region:name
+    required: true
+    visible: true
+
+  compartment_ocid:
+    type: oci:identity:compartment:id
+    required: true
+    title: "Compartment"
+    visible: true
+
+  tenancy_ocid:
+    type: string
+    required: true
+    title: "Tenancy"
+    visible: true
+
+  custom_ssh_key:
+    type: oci:core:ssh:publickey
+    required: true
+    default: [""]
+    pattern: "((^(ssh-rsa AAAAB3NzaC1yc2|ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNT|ecdsa-sha2-nistp384 AAAAE2VjZHNhLXNoYTItbmlzdHAzODQAAAAIbmlzdHAzOD|ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1Mj|ssh-ed25519 AAAAC3NzaC1lZDI1NTE5|ssh-dss AAAAB3NzaC1kc3)[0-9A-Za-z+\/]+[=]{0,3})( [^,]*)?)(,((ssh-rsa AAAAB3NzaC1yc2|ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNT|ecdsa-sha2-nistp384 AAAAE2VjZHNhLXNoYTItbmlzdHAzODQAAAAIbmlzdHAzOD|ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1Mj|ssh-ed25519 AAAAC3NzaC1lZDI1NTE5|ssh-dss AAAAB3NzaC1kc3)[0-9A-Za-z+\/]+[=]{0,3})( [^,]*)?)*$"
+    title: "Arcade Web Compute SSH Key"
+
+  git_repo:
+    type: string
+    required: true
+    title: "GIT Repository URL"
+    visible: true
+
+  custom_theia_user:
+    type: string
+    required: true
+    title: "Theia User"
+
+  custom_theia_password:
+    type: password
+    required: true
+    title: "Theia Password"
